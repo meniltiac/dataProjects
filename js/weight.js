@@ -4,7 +4,7 @@ var margin = {top: 20, right: 20, bottom: 30, left: 50},
     height = 500 - margin.top - margin.bottom;
 
 // parse the date / time
-var parseTime = d3.timeParse("%d-%b-%y");
+var parser = d3.timeParse("%Y-%m-%d");
 
 // set the ranges
 var x = d3.scaleTime().range([0, width]);
@@ -26,24 +26,31 @@ var svg = d3.select("#weight_svg")
           "translate(" + margin.left + "," + margin.top + ")");
 
 // Get the data
-d3.csv("./data/caitlin_weight/measurements.csv", function(error, data) {
+d3.json("./data/caitlin_weight/measurements.json", function(error, data) {
   if (error) throw error;
 
   // format the data
   data.forEach(function(d) {
-      d.date = parseTime(d.date);
+      d.date = parser(d.date);
       d.weight = +d.weight;
   });
 
   // Scale the range of the data
   x.domain(d3.extent(data, function(d) { return d.date; }));
-  y.domain([0, d3.max(data, function(d) { return d.weight; })]);
+  y.domain([125, d3.max(data, function(d) { return d.weight + 10; })]);
 
   // Add the valueline path.
   svg.append("path")
       .data([data])
       .attr("class", "line")
       .attr("d", valueline);
+
+  svg.append("rect")
+      .attr("class", "vacation")
+      .attr("x", "30")
+      .attr("y", "20")
+      .attr("width", "30")
+      .attr("height", "100%");
 
   // Add the X Axis
   svg.append("g")
