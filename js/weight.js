@@ -29,28 +29,23 @@ var svg = d3.select("#weight_svg")
 d3.json("./data/caitlin_weight/measurements.json", function(error, data) {
   if (error) throw error;
 
+console.log(data[0].vacationDays);
+
   // format the data
-  data.forEach(function(d) {
+  data[0].measurements.forEach(function(d) {
       d.date = parser(d.date);
       d.weight = +d.weight;
   });
 
   // Scale the range of the data
-  x.domain(d3.extent(data, function(d) { return d.date; }));
-  y.domain([125, d3.max(data, function(d) { return d.weight + 10; })]);
+  x.domain(d3.extent(data[0].measurements, function(d) { return d.date; }));
+  y.domain([125, d3.max(data[0].measurements, function(d) { return d.weight + 10; })]);
 
   // Add the valueline path.
   svg.append("path")
-      .data([data])
+      .data([data[0].measurements])
       .attr("class", "line")
       .attr("d", valueline);
-
-  svg.append("rect")
-      .attr("class", "vacation")
-      .attr("x", "30")
-      .attr("y", "20")
-      .attr("width", "30")
-      .attr("height", "100%");
 
   // Add the X Axis
   svg.append("g")
