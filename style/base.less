@@ -1,0 +1,86 @@
+.dataviz {
+	width: 90vw;
+	margin: 45px auto;
+	color: #000;
+	text-align: center;
+
+
+	svg {
+
+	}
+
+	.bar {
+	  fill: #FF5A5F;
+	}
+
+	.wrapper {
+		position: relative;
+
+		.data-explainer {
+			text-align: left;
+			position: absolute;
+			z-index: 900;
+			background: #008489;
+			color: #fff;
+			font-size: .9em;
+			padding: 0;
+			border-radius: 2px;
+			overflow: hidden;
+			width: auto;
+			max-width: 400px;
+			margin-left: auto;
+			margin-right: auto;
+			top: 0;
+			left: 0;
+			right: 0;
+
+			.airbnb {
+				max-width: 40px;
+				display: inline;
+				vertical-align: middle;
+
+			}
+
+			span {
+				vertical-align: top !important;
+				display: inline-block;
+				margin-right: 15px;
+				margin-left: 15px;
+				margin-top: 6px;
+			}
+		}
+
+	}
+
+	.line {
+	    fill: none;
+	    stroke: #ffab00;
+	    stroke-width: 3;
+	}
+
+	/* Style the dots by assigning a fill and stroke */
+	.dot {
+	    fill: #ffab00;
+	    stroke: #fff;
+	}
+
+
+	.bar:hover {
+	  fill: #FF0007;
+	}
+
+	.axis--x path {
+	  display: none;
+	}
+
+	.arc text {
+	  font: 10px sans-serif;
+	  text-anchor: middle;
+	}
+
+	.arc path {
+	  stroke: #fff;
+	}
+
+
+}
